@@ -1,95 +1,88 @@
 # Setup & usage of nam-shub-01 on private laptop
 
-## ̊Asmund Danielsen Kvitvang, Marius Aasan
-
-## Updated: December 2, 2020
-
 ## 1 Setup
 
-1. Make sure you have a hidden directory called.sshin your home folder
-    by typingls -a. If not, make one.
+1. Make sure you have a hidden directory called `.ssh` in your home folder
+    by typing `ls -a`. If not, make one.
 2. Next, we need to create private/public rsa key pair. This is done by typing
     the following (changeusernameto your uio username).
-
-```
-ssh-keygen -t rsa -b 4096 -C "[username]@uio.no"
-```
-```
-When terminal asks you
-```
-```
-Enter file in which to save the key(...):
-```
-```
-click [ENTER]. When terminal asks you
-```
-```
-Enter passphrase (empty for no passphrase):
-```
-```
-choose a password (minimum 5 characters). You also need to repeat
-the password. By typinglsin your terminal you will at this point ob-
-serve that you have two new items in your directory, namelyid_rsaand
-id_rsa.pub, which is your private and public key, respectively. By typing
-cat id_rsa[.pub]you may inspect these items.
-```
+    ```
+    ssh-keygen -t rsa -b 4096 -C "[username]@uio.no"
+    ```
+    ```
+    When terminal asks you
+    ```
+    ```
+    Enter file in which to save the key(...):
+    ```
+    ```
+    click [ENTER]. When terminal asks you
+    ```
+    ```
+    Enter passphrase (empty for no passphrase):
+    ```
+    ```
+    choose a password (minimum 5 characters). You also need to repeat
+    the password. By typinglsin your terminal you will at this point ob-
+    serve that you have two new items in your directory, namelyid_rsaand
+    id_rsa.pub, which is your private and public key, respectively. By typing
+    cat id_rsa[.pub]you may inspect these items.
+    ```
 3. Next, you may create a config file for your own convenience. Write
     [EDITOR NAME] configto open such a file (within.sshdirectory). Write
     the following into theconfigfile and save (changeusernameto your uio
     username).
+    ```
+    Host *
+    ServerAliveInterval 60
+    ServerAliveCountMax 1440
+    ```
 
-```
-Host *
-ServerAliveInterval 60
-ServerAliveCountMax 1440
-```
-
-```
-Host uio
-Hostname login.math.uio.no
-user [username]
-```
-```
-Host nam-shub-
-Hostname nam-shub-
-ProxyJump [username]@login.math.uio.no
-user [username]
-```
-```
-The first three lines is to make sure that a session don’t terminate if user
-is not active. It tells the host ping a small package every 60 second. This
-is done a total of 1440 times. Thus, we are made sure that our program
-runs for at least 24 hours. The next three lines makes our life easier when
-we log in to the host calledlogin.math.uio.no. Instead of typing
-```
-```
-ssh [username]@login.math.uio.no
-```
-```
-to log in we now only need to typessh uio. NB: Do not run complex
-computations on this computer, as it only serves as a passage for logging
-intonam-shub-01. The last four lines is for easier login tonam-shub-01.
-The wordProxyJumpsimply meansuse this computer as passage to the
-nam-shub-01computer.
-```
+    ```
+    Host uio
+    Hostname login.math.uio.no
+    user [username]
+    ```
+    ```
+    Host nam-shub-
+    Hostname nam-shub-
+    ProxyJump [username]@login.math.uio.no
+    user [username]
+    ```
+    ```
+    The first three lines is to make sure that a session don’t terminate if user
+    is not active. It tells the host ping a small package every 60 second. This
+    is done a total of 1440 times. Thus, we are made sure that our program
+    runs for at least 24 hours. The next three lines makes our life easier when
+    we log in to the host calledlogin.math.uio.no. Instead of typing
+    ```
+    ```
+    ssh [username]@login.math.uio.no
+    ```
+    ```
+    to log in we now only need to typessh uio. NB: Do not run complex
+    computations on this computer, as it only serves as a passage for logging
+    intonam-shub-01. The last four lines is for easier login tonam-shub-01.
+    The wordProxyJumpsimply meansuse this computer as passage to the
+    nam-shub-01computer.
+    ```
 4. Lastly, we need to copy thepublicrsa key from our private laptop to the
     uio computer. Navigate to.sshfolder and type the following.
-
-```
-ssh-copy-id -i id_rsa.pub uio
-```
-```
-Note that we now use the alias of the machine, created in theconfigfile.
-```
+    ```
+    ssh-copy-id -i id_rsa.pub uio
+    ```
+    ```
+    Note that we now use the alias of the machine, created in theconfigfile.
+    ```
 5. Now we are ready for usage of these computers. Simply type
+    ```
+    ssh nam-shub-
+    ```
+    ```
+    to log into the computer. Enter password if credentials are needed. To
+    exit the computer you may typeCTRL+d.
+    ```
 
-```
-ssh nam-shub-
-```
-```
-to log into the computer. Enter password if credentials are needed. To
-exit the computer you may typeCTRL+d.
-```
 ## 2 Useful stuff
 
 ### 2.1 Moving files
@@ -98,10 +91,10 @@ You may want to move (relatively small) files back and forth between private
 laptop and uio computer. To move a file from private laptop to uio computer,
 type the following.
 
-
 ```
 scp [private-location/filename] uio:[uio-location]
 ```
+
 To move a file from uio computer to private laptop, type the following.
 
 ```
@@ -149,8 +142,7 @@ A neat way of only using e.g. GPU 1 and 2, if one does not want (or need) to
 use all four at the same time, is by adding the following three lines of code at
 the start of your Python script.
 
-
-```
+```python
 import os
 os.environ["CUDA_DEVICE_ORDER"]="PCI_BUS_ID"
 os.environ["CUDA_VISIBLE_DEVICES"]="1,2"
@@ -177,7 +169,7 @@ session, while GPUs 0 and 3 ’does not exist’. The following code illustrates
 ```
 Running the code WITH lines 1-3 yields the following output.
 
-```fsharp
+```
 Available: True , Count: 4
 Name: /physical_device:GPU:0 , Type: GPU
 Name: /physical_device:GPU:1 , Type: GPU
@@ -197,37 +189,37 @@ The following is a description on how to use Jupyter notebook/lab on UiOs
 computers.
 
 1. Open two terminals, hereby calledterm1andterm2.
+
 2. Interm1, log intonam-shub-01by typing the following.
+    ```
+    ssh -Y nam-shub-
+    ```
+    ```
+    The flag-Yenables trusted X11 forwarding.
+    ```
 
-
-```
-ssh -Y nam-shub-
-```
-```
-The flag-Yenables trusted X11 forwarding.
-```
 3. Still being interm1, start Jupyter notebook by typing the following.
+    ```
+    jupyter notebook --no-browser --port=
+    ```
+    ```
+    Jupyter lab may be started in similar fashion. The port chosen (=8081) to
+    transfer data is somewhat arbitrarily chosen, however we need to ensure
+    that we choose a port which is not used for anything else.
+    ```
 
-```
-jupyter notebook --no-browser --port=
-```
-```
-Jupyter lab may be started in similar fashion. The port chosen (=8081) to
-transfer data is somewhat arbitrarily chosen, however we need to ensure
-that we choose a port which is not used for anything else.
-```
 4. Interm2 we now want to start forwarding the ssh signal. Do this by
     typing the following.
+    ```
+    ssh -N -L 8081:localhost:8081 nam-shub-
+    ```
+    ```
+    The flag-Nstates not to execute a remote command. This is useful for
+    just forwarding ports (protocol version 2 only). The flag-Lspecifies that
+    the given port on the local (client) host is to be forwarded to the given
+    host and port on the remote side.
+    ```
 
-```
-ssh -N -L 8081:localhost:8081 nam-shub-
-```
-```
-The flag-Nstates not to execute a remote command. This is useful for
-just forwarding ports (protocol version 2 only). The flag-Lspecifies that
-the given port on the local (client) host is to be forwarded to the given
-host and port on the remote side.
-```
 5. Now that you have obtained connection through given port, go back to
     term1where you can find some links which can be copied to your browser,
     to be able to view the notebook.
@@ -260,9 +252,9 @@ conda init bash
 This will append the necessary lines. However, the.bashrcfile does not run
 automatically when you login to the server. Thus you will have to manually run
 these lines, by typing in
-
+```
 . .bashrc
-
+```
 After this has been completed, you can create a new Anaconda environment by
 typing
 
@@ -280,9 +272,9 @@ you will have to run the commands
 
 ```
 module load Anaconda
-```
 . .bashrc
 conda activate [name_of_environment]
+```
 
 to load your personal conda environment. To simplify this, you can optionally
 create a bash script to do this for you. The bash script will look something like
@@ -299,9 +291,9 @@ by running
 chmod +x [name_of_script].sh
 ```
 Now you can run your script by typing
-
+```
 . [name_of_script].sh
-
+```
 and your Anaconda environment is ready to go.
 
 
