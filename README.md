@@ -1,3 +1,5 @@
+![UiO logo](/img/uio_seal_eng.png){:height="50%" width="50%"}
+
 # Setup & usage of nam-shub-01 on private laptop
 
 This repository consist of a setup manual for UiOs `nam-shub-01` computer located at the
