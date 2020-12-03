@@ -1,4 +1,4 @@
-![UiO logo](/img/uio_seal_eng.png){:height="50%" width="50%"}
+![UiO logo](/img/uio_seal_eng.png)
 
 # Setup & usage of nam-shub-01 on private laptop
 
