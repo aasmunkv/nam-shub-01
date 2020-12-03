@@ -41,8 +41,8 @@
         user [username]
     ```
     The first three lines is to make sure that a session don’t terminate if user
-    is not active. It tells the host ping a small package every $60$ second. This
-    is done a total of $1440$ times. Thus, we are made sure that our program
+    is not active. It tells the host ping a small package every *60* second. This
+    is done a total of *1440* times. Thus, we are made sure that our program
     runs for at least 24 hours. The next three lines makes our life easier when
     we log in to the host calledlogin.math.uio.no. Instead of typing
     ```
@@ -169,13 +169,13 @@ computers.
     ```
     ssh -Y nam-shub-01
     ```
-    The flag `-Y` enables trusted $X11$ forwarding.
+    The flag `-Y` enables trusted *X11* forwarding.
 
 3. Still being in *term1*, start Jupyter notebook by typing the following.
     ```
     jupyter notebook --no-browser --port=8081
     ```
-    Jupyter lab may be started in similar fashion. The port chosen ($=8081$) to
+    Jupyter lab may be started in similar fashion. The port chosen (*=8081*) to
     transfer data is somewhat arbitrarily chosen, however we need to ensure
     that we choose a port which is not used for anything else.
 
@@ -276,7 +276,7 @@ type `nvidia-smi`.
 
 ### 2.8 Additional
 
-If you want to repeat a command in the terminal every $N$ second, type the
+If you want to repeat a command in the terminal every *N* second, type the
 following.
 ```
 watch -n [N] [command]
