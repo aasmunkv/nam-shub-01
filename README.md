@@ -1,4 +1,4 @@
-<img src="/img/uio_seal_eng.png" width="1176" height="199">
+<img src="/img/uio_seal_eng.png" width="588" height="100">
 
 # Setup & usage of nam-shub-01 on private laptop
 
