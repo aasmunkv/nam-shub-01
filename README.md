@@ -1,11 +1,15 @@
 # Setup & usage of nam-shub-01 on private laptop
 
+This repository consist of a setup manual for UiOs `nam-shub-01` computer located at the
+Department of Mathematics, along with useful information on setup of other tools when
+using this machine.
+
 ## 1 Setup
 
 1. Make sure you have a hidden directory called `.ssh` in your home folder
     by typing `ls -a`. If not, make one.
 2. Next, we need to create private/public rsa key pair. This is done by typing
-    the following (changeusernameto your uio username).
+    the following (change *username* to your uio username).
     ```
     ssh-keygen -t rsa -b 4096 -C "[username]@uio.no"
     ```
@@ -41,14 +45,14 @@
         user [username]
     ```
     The first three lines is to make sure that a session don’t terminate if user
-    is not active. It tells the host ping a small package every *60* second. This
+    is not active. It tells the host to ping a small package every *60* second. This
     is done a total of *1440* times. Thus, we are made sure that our program
     runs for at least 24 hours. The next three lines makes our life easier when
-    we log in to the host calledlogin.math.uio.no. Instead of typing
+    we log in to the host called `login.math.uio.no`. Instead of typing
     ```
     ssh [username]@login.math.uio.no
     ```
-    to log in we now only need to typessh uio. **NB**: Do not run complex
+    to log in we now only need to type `ssh uio`. **NB**: Do not run complex
     computations on this computer, as it only serves as a passage for logging
     into `nam-shub-01`. The last four lines is for easier login to `nam-shub-01`.
     The word `ProxyJump` simply means 
@@ -110,7 +114,7 @@ install it by typing the following.
 ```
 pip3 install --user [module name]
 ```
-The command line argument--useris to avoid admin login for installation.
+The command line argument `--user` is to avoid admin login for installation.
 It is in this case a module for your use only and will not be available for the
 outside world.
 
@@ -118,7 +122,8 @@ outside world.
 
 A neat way of only using e.g. GPU 1 and 2, if one does not want (or need) to
 use all four at the same time, is by adding the following three lines of code at
-the start of your Python script.
+the beginning of your Python script, i.e. at your programs entry point (BEFORE all other
+imports are executed).
 ```python
 import os
 os.environ["CUDA_DEVICE_ORDER"]="PCI_BUS_ID"
@@ -143,7 +148,7 @@ session, while GPUs 0 and 3 ’does not exist’. The following code illustrates
 13 for gpu in gpus:
 14     print("Name:",gpu.name,", Type:",gpu.device_type)
 ```
-Running the code WITH lines 1-3 yields the following output.
+Running the code WITHOUT lines 1-3 yields the following output.
 ```
 Available: True , Count: 4
 Name: /physical_device:GPU:0 , Type: GPU
@@ -151,7 +156,7 @@ Name: /physical_device:GPU:1 , Type: GPU
 Name: /physical_device:GPU:2 , Type: GPU
 Name: /physical_device:GPU:3 , Type: GPU
 ```
-Running the code WITHOUT lines 1-3 yields the following output.
+Running the code WITH lines 1-3 yields the following output.
 ```
 Available: True , Count: 2
 Name: /physical_device:GPU:0 , Type: GPU
