@@ -6,7 +6,17 @@ This repository consist of a setup manual for UiOs `nam-shub-01` computer locate
 Department of Mathematics, along with useful information on setup of other tools when
 using this machine.
 
-## 1 Setup
+## Contents
+* [Setup](#setup)
+* [Moving files](#moving)
+* [Module handling](#module)
+* [Handling GPUs with Python](#gpu_handling)
+* [Using Jupyter](#jupyter)
+* [Using Anaconda](#anaconda)
+* [Using VSCode](#vscode)
+* [Process handling](#process_handling)
+
+## 1 Setup <a name="setup"></a>
 
 1. Make sure you have a hidden directory called `.ssh` in your home folder
     by typing `ls -a`. If not, make one.
@@ -76,7 +86,7 @@ using this machine.
 
 ## 2 Useful stuff
 
-### 2.1 Moving files
+### 2.1 Moving files <a name="moving"></a>
 
 You may want to move (relatively small) files back and forth between private
 laptop and uio computer. To move a file from private laptop to uio computer,
@@ -89,7 +99,7 @@ To move a file from uio computer to private laptop, type the following.
 scp uio:[uio-location/filename] [private-location]
 ```
 
-### 2.2 Module handling
+### 2.2 Module handling <a name="module"></a>
 
 When you are logged into one of UiOs many computers you need to load the
 modules you are going to use when developing. To see complete list of available
@@ -120,7 +130,7 @@ The command line argument `--user` is to avoid admin login for installation.
 It is in this case a module for your use only and will not be available for the
 outside world.
 
-### 2.3 Handling GPUs using Python
+### 2.3 Handling GPUs using Python <a name="gpu_handling"></a>
 
 A neat way of only using e.g. GPU 1 and 2, if one does not want (or need) to
 use all four at the same time, is by adding the following three lines of code at
@@ -165,7 +175,7 @@ Name: /physical_device:GPU:0 , Type: GPU
 Name: /physical_device:GPU:1 , Type: GPU
 ```
 
-### 2.4 Jupyter notebook/lab
+### 2.4 Jupyter notebook/lab <a name="jupyter"></a>
 
 The following is a description on how to use Jupyter notebook/lab on UiOs
 computers.
@@ -200,7 +210,7 @@ computers.
     *term1* where you can find some links which can be copied to your browser,
     to be able to view the notebook.
 
-### 2.5 Anaconda support
+### 2.5 Anaconda support <a name="anaconda"></a>
 
 Many users will be familiar with Anaconda as a Python virtual environment
 and package manager. The server has Anaconda support, and you can create
@@ -260,7 +270,7 @@ Now you can run your script by typing
 ```
 and your Anaconda environment is ready to go.
 
-### 2.6 VSCode support
+### 2.6 VSCode support <a name="vscode"></a>
 
 VSCode has ssh support for working in your home environment on the UiO
 servers. By using VSCode, you can easily browse, edit, and generally manage
@@ -276,7 +286,7 @@ If this doesn’t show up, you will need to set these manually.
 [This guide](https://code.visualstudio.com/docs/remote/ssh) can provide more detailed 
 information on how to go about setting up ssh support with VSCode.
 
-### 2.7 Process handling
+### 2.7 Process handling <a name="process_handling"></a>
 
 To get a list of active processes on CPU, type `htop`. To see status on GPUs,
 type `nvidia-smi`.
