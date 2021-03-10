@@ -178,7 +178,7 @@ Name: /physical_device:GPU:1 , Type: GPU
 ### 2.4 Jupyter notebook/lab <a name="jupyter"></a>
 
 The following is a description on how to use Jupyter notebook/lab on UiOs
-computers. ***Please note that processes using CUDA launched from within a Notebook will likely not free the GPU memory. See the note at the end of this section ***
+computers. ***Please note that processes using CUDA launched from within a Notebook will likely not free the GPU memory. See the note at the end of this section***
 
 1. Open two terminals, hereby called *term1* and *term2*.
 
