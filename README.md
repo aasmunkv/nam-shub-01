@@ -178,7 +178,7 @@ Name: /physical_device:GPU:1 , Type: GPU
 ### 2.4 Jupyter notebook/lab <a name="jupyter"></a>
 
 The following is a description on how to use Jupyter notebook/lab on UiOs
-computers.
+computers. ***Please note that processes using CUDA launched from within a Notebook will likely not free the GPU memory. See the note at the end of this section ***
 
 1. Open two terminals, hereby called *term1* and *term2*.
 
@@ -209,6 +209,23 @@ computers.
 5. Now that you have obtained connection through given port, go back to
     *term1* where you can find some links which can be copied to your browser,
     to be able to view the notebook.
+
+6. Note that memory allocated by CUDA processes (e.g. in PyTorch or Tensorflow) will occupy GPU memory until the Python kernel is shut down.
+    So please make sure to shut down Jupyter notebooks on nam-shub-01 when you are done working with them. If you run a long training session (overnight, for example) from inside the notebook, you could consider using `exit()` in the last Notebook cell to shut down the Python process:
+    ```
+    if torch.cuda.is_available():
+        # If you want to check how much memory your processes occupy:
+        print(format(torch.cuda.memory_allocated(device), ".1e"))
+    
+    # Make a checkpoint of the Notebook:
+    from IPython.display import display, Javascript
+    display(Javascript('IPython.notebook.save_checkpoint();'))
+    
+    # THE IMPORTANT POINT: exit the python process to free the memory
+    exit()
+    ```
+    This will shut down the Python process and hence free the memory for other users of nam-shub-01.
+
 
 ### 2.5 Anaconda support <a name="anaconda"></a>
 
