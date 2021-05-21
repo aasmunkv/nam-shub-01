@@ -316,3 +316,22 @@ following.
 ```
 watch -n [N] [command]
 ```
+
+You can use `screen` to launch terminal sessions that remain active even is you disconnect:
+
+```
+$ screen -S testSession
+# This will open a "new terminal" inside the terminal
+# Do stuff, e.g.
+$ python helloworld.py
+# press Ctrl, A , D to disconnect from the screen
+$ screen -ls
+There are screens on:
+	110113.testSession	(Detached)
+# This session will remain active even though you log out from ssh
+# use -r to re-attach to the session
+$ screen -r testSession
+# To exit and kill the screen session, simply type exit inside the screen:
+$ exit
+$ [screen is terminating]
+```
